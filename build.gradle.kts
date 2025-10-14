@@ -17,6 +17,7 @@ repositories {
 dependencies {
     // Core Web + REST
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // Database: PostgreSQL + JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

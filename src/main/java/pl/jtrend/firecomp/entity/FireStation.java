@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "fireman")
+@Table(name = "fire_station")
 @Data                      // Generates getters, setters, equals, hashCode, toString
 @NoArgsConstructor         // Default constructor
 @AllArgsConstructor        // All-args constructor

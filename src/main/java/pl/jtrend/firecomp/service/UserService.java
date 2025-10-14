@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.jtrend.firecomp.dto.UserDto;
 import pl.jtrend.firecomp.entity.User;
-import pl.jtrend.firecomp.mapper.Mapper;
+import pl.jtrend.firecomp.mapper.FireCompMapper;
 import pl.jtrend.firecomp.repository.UserRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final Mapper mapper;
+    private final FireCompMapper mapper;
 
     public List<UserDto> getAll() {
         return userRepository.findAll().stream().map(mapper::toUserDto).toList();

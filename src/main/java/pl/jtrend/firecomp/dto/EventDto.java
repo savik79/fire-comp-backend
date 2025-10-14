@@ -18,5 +18,6 @@ public class EventDto {
     private LocalDateTime endTimestamp;
     private Integer mileage;
     private Integer fireUnits;
-    private Set<Long> participantIds; // Fireman ID
+    private Set<Long> participantIds;
+    private Set<Long> fireTrucksIds;
 }

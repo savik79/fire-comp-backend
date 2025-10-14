@@ -10,6 +10,7 @@ CREATE TABLE users
     id       BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    email    VARCHAR(255),
     enabled  BOOLEAN      NOT NULL DEFAULT TRUE
 );
 
@@ -59,16 +60,17 @@ CREATE TABLE fireman
 -- ========== FIRE TRUCKS ==========
 CREATE TABLE fire_truck
 (
-    id                  BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    side_number         VARCHAR(100) NOT NULL,
-    registration_number VARCHAR(100) NOT NULL UNIQUE,
-    model               VARCHAR(255),
-    year_of_production  INTEGER,
-    capacity_liters     INTEGER,
-    type                VARCHAR(100),
-    type_description    TEXT,
-    station_id          BIGINT       REFERENCES fire_station (id) ON DELETE SET NULL,
-    remarks             TEXT
+    id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    side_number        VARCHAR(100) NOT NULL,
+    plate_number       VARCHAR(100) NOT NULL UNIQUE,
+    model              VARCHAR(255),
+    year_of_production INTEGER,
+    capacity_liters    INTEGER,
+    type               VARCHAR(100),
+    type_description   TEXT,
+    station_id         BIGINT       REFERENCES fire_station (id) ON DELETE SET NULL,
+    event_id           BIGINT       REFERENCES event (id) ON DELETE SET NULL,
+    remarks            TEXT
 );
 
 -- ========== EVENTS ==========
@@ -102,7 +104,7 @@ CREATE TABLE report
     type     VARCHAR(20) NOT NULL CHECK (type IN ('WORD', 'XML', 'PDF')),
     content  BYTEA       NOT NULL,
     event_id BIGINT      NOT NULL REFERENCES event (id) ON DELETE CASCADE,
-    user_id BIGINT NOT NULL REFERENCES users(id)
+    user_id  BIGINT      NOT NULL REFERENCES users (id)
 );
 
 -- Indexes for performance

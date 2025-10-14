@@ -1,16 +1,16 @@
 package pl.jtrend.firecomp.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jtrend.firecomp.dto.FiremanDto;
 import pl.jtrend.firecomp.entity.FireStation;
 import pl.jtrend.firecomp.entity.Fireman;
-import pl.jtrend.firecomp.mapper.Mapper;
+import pl.jtrend.firecomp.mapper.FireCompMapper;
 import pl.jtrend.firecomp.repository.FireStationRepository;
 import pl.jtrend.firecomp.repository.FiremanRepository;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,14 +18,10 @@ public class FiremanService {
 
     private final FiremanRepository firemanRepository;
     private final FireStationRepository fireStationRepository;
-    private final Mapper mapper;
+    private final FireCompMapper mapper;
 
-    // === GET ALL FIREMEN ===
-    public List<FiremanDto> getAll() {
-        return firemanRepository.findAll()
-                .stream()
-                .map(mapper::toFiremanDto)
-                .toList();
+    public Page<FiremanDto> getAll(Pageable pageable) {
+        return firemanRepository.findAll(pageable).map(mapper::toFiremanDto);
     }
 
     // === GET FIREMAN BY ID ===

@@ -56,4 +56,10 @@ public class Event {
 
     @OneToMany(mappedBy = "event", orphanRemoval = true)
     private Set<FireTruck> fireTrucks;
+
+    @PrePersist
+    @PreUpdate
+    public void calculateFireUnits(){
+        fireUnits = fireTrucks!=null ? fireTrucks.size() : 0;
+    }
 }

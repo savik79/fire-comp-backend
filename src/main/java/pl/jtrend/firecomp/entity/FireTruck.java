@@ -21,7 +21,7 @@ public class FireTruck {
     private String sideNumber;
 
     @Column(nullable = false)
-    private String registrationNumber;
+    private String plateNumber;
 
     private String model;
     private Integer yearOfProduction;
@@ -38,4 +38,8 @@ public class FireTruck {
      * notes for the vehicle
      */
     private String remarks;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")  // owning side
+    private Event event;
 }

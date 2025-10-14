@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
-@Data                      // Generates getters, setters, equals, hashCode, toString
+@Table(name = "\"user\"")
+@Data// Generates getters, setters, equals, hashCode, toString
 @NoArgsConstructor         // Default constructor
 @AllArgsConstructor        // All-args constructor
 @Builder
@@ -19,10 +19,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String username;
     private String password;
+    private String email;
 
     private boolean enabled = true;
 
