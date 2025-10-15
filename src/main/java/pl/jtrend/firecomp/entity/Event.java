@@ -1,6 +1,8 @@
 package pl.jtrend.firecomp.entity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "event")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -61,5 +64,21 @@ public class Event {
     @PreUpdate
     public void calculateFireUnits(){
         fireUnits = fireTrucks!=null ? fireTrucks.size() : 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        return new EqualsBuilder().append(id, event.id).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(id).toHashCode();
     }
 }

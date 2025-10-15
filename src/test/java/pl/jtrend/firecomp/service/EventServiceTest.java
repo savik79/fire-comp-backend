@@ -14,6 +14,7 @@ import pl.jtrend.firecomp.repository.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -117,8 +118,8 @@ public class EventServiceTest {
         fireTruckRepository.saveAll(List.of(truck1, truck2));
 
         // --- Persist final event with relations ---
-        savedEvent.setFireTrucks(Set.of(truck1, truck2));
-        savedEvent.setReports(Set.of(report));
+        savedEvent.setFireTrucks(new HashSet<>(Set.of(truck1, truck2)));
+        savedEvent.setReports(new HashSet<>(Set.of(report)));
         eventRepository.save(savedEvent);
 
         // === ASSERT (verify relationships) ===
