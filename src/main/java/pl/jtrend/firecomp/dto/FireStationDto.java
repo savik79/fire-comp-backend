@@ -1,7 +1,9 @@
 package pl.jtrend.firecomp.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class FireStationDto {
     private Long id;

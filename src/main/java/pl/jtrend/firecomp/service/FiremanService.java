@@ -18,22 +18,22 @@ public class FiremanService {
 
     private final FiremanRepository firemanRepository;
     private final FireStationRepository fireStationRepository;
-    private final FireCompMapper mapper;
+    private final FireCompMapper fireCompMapper;
 
     public Page<FiremanDto> getAll(Pageable pageable) {
-        return firemanRepository.findAll(pageable).map(mapper::toFiremanDto);
+        return firemanRepository.findAll(pageable).map(fireCompMapper::toFiremanDto);
     }
 
     // === GET FIREMAN BY ID ===
     public FiremanDto getById(Long id) {
         return firemanRepository.findById(id)
-                .map(mapper::toFiremanDto)
+                .map(fireCompMapper::toFiremanDto)
                 .orElseThrow(() -> new RuntimeException("Fireman not found"));
     }
 
     // === CREATE FIREMAN ===
     public FiremanDto create(FiremanDto dto) {
-        Fireman fireman = mapper.toFireman(dto);
+        Fireman fireman = fireCompMapper.toFireman(dto);
 
         if (dto.getFireStationId() != null) {
             FireStation station = fireStationRepository.findById(dto.getFireStationId())
@@ -42,7 +42,7 @@ public class FiremanService {
         }
 
         Fireman saved = firemanRepository.save(fireman);
-        return mapper.toFiremanDto(saved);
+        return fireCompMapper.toFiremanDto(saved);
     }
 
     // === UPDATE FIREMAN ===
@@ -65,7 +65,7 @@ public class FiremanService {
         }
 
         Fireman updated = firemanRepository.save(fireman);
-        return mapper.toFiremanDto(updated);
+        return fireCompMapper.toFiremanDto(updated);
     }
 
     // === DELETE FIREMAN ===

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class FireStationService {
 
     private final FireStationRepository fireStationRepository;
-    private final FireCompMapper mapper;
+    private final FireCompMapper fireCompMapper;
 
     public FireStation save(FireStation fireStation) {
         return fireStationRepository.save(fireStation);
@@ -30,7 +30,7 @@ public class FireStationService {
 
 
     public Page<FireStationDto> findAll(Pageable pageable) {
-        return fireStationRepository.findAll(pageable).map(mapper::toFireStationDto);
+        return fireStationRepository.findAll(pageable).map(fireCompMapper::toFireStationDto);
     }
 
 

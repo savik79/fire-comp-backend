@@ -10,6 +10,7 @@ import pl.jtrend.firecomp.service.EventService;
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class EventController {
 
     private final EventService eventService;
