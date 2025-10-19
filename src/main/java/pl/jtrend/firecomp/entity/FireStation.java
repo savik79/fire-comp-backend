@@ -31,7 +31,7 @@ public class FireStation {
     private String email;
     private String commanderName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "address_id")
     private Address address;
 

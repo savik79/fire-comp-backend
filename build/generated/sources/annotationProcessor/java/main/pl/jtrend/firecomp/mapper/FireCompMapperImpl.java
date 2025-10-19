@@ -22,7 +22,7 @@ import pl.jtrend.firecomp.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-17T22:51:29+0200",
+    date = "2025-10-19T19:08:34+0200",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.10.jar, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -165,6 +165,7 @@ public class FireCompMapperImpl implements FireCompMapper {
         fireStationDto.email( station.getEmail() );
         fireStationDto.commanderName( station.getCommanderName() );
         fireStationDto.active( station.getActive() );
+        fireStationDto.establishedDate( station.getEstablishedDate() );
 
         return fireStationDto.build();
     }
@@ -183,6 +184,7 @@ public class FireCompMapperImpl implements FireCompMapper {
         fireStation.phoneNumber( dto.getPhoneNumber() );
         fireStation.email( dto.getEmail() );
         fireStation.commanderName( dto.getCommanderName() );
+        fireStation.establishedDate( dto.getEstablishedDate() );
         fireStation.active( dto.getActive() );
 
         return fireStation.build();

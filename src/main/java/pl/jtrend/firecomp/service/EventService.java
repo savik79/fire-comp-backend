@@ -23,38 +23,39 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final FiremanRepository firemanRepository;
-    private final FireCompMapper mapper;
+    private final FireCompMapper fireCompMapper;
     private final FireTruckRepository fireTruckRepository;
 
     // === GET ALL (paginated) ===
     public Page<EventDto> getAll(Pageable pageable) {
         return eventRepository.findAll(pageable)
-                .map(mapper::toEventDto);
+                .map(fireCompMapper::toEventDto);
     }
 
     // === GET BY ID ===
     public EventDto getById(Long id) {
         return eventRepository.findById(id)
-                .map(mapper::toEventDto)
+                .map(fireCompMapper::toEventDto)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
     }
 
     // === CREATE ===
     @Transactional
     public EventDto create(EventDto dto) {
-        Event event = mapper.toEvent(dto);
+        Event event = fireCompMapper.toEvent(dto);
 
         if (dto.getParticipantIds() != null && !dto.getParticipantIds().isEmpty()) {
             Set<Fireman> participants = new HashSet<>(firemanRepository.findAllById(dto.getParticipantIds()));
             event.setParticipants(participants);
         }
         if (dto.getFireTrucksIds()!=null && !dto.getFireTrucksIds().isEmpty()){
+            assert dto.getParticipantIds() != null;
             Set<FireTruck> trucks = new HashSet<>(fireTruckRepository.findAllById(dto.getParticipantIds()));
             event.setFireTrucks(trucks);
         }
 
         Event saved = eventRepository.save(event);
-        return mapper.toEventDto(saved);
+        return fireCompMapper.toEventDto(saved);
     }
 
     // === UPDATE ===
@@ -79,7 +80,7 @@ public class EventService {
         }
 
         Event updated = eventRepository.save(event);
-        return mapper.toEventDto(updated);
+        return fireCompMapper.toEventDto(updated);
     }
 
     // === DELETE ===

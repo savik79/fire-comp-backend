@@ -4,7 +4,7 @@ import org.mapstruct.*;
 import pl.jtrend.firecomp.dto.*;
 import pl.jtrend.firecomp.entity.*;
 
-@org.mapstruct.Mapper(componentModel =  "spring", uses = {FiremanMapper.class})
+@org.mapstruct.Mapper(componentModel =  "spring", uses = {FiremanMapper.class, AddressMapper.class})
 public interface FireCompMapper {
 
     FireCompMapper INSTANCE = Mappers.getMapper(FireCompMapper.class);
