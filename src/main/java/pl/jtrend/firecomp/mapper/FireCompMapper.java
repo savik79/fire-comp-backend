@@ -4,7 +4,9 @@ import org.mapstruct.*;
 import pl.jtrend.firecomp.dto.*;
 import pl.jtrend.firecomp.entity.*;
 
-@org.mapstruct.Mapper(componentModel =  "spring", uses = {FiremanMapper.class, AddressMapper.class})
+@org.mapstruct.Mapper(componentModel =  "spring",
+        uses = {FiremanMapper.class, AddressMapper.class,
+                FireTruckMapper.class, FireStationMapper.class})
 public interface FireCompMapper {
 
     FireCompMapper INSTANCE = Mappers.getMapper(FireCompMapper.class);
@@ -29,9 +31,12 @@ public interface FireCompMapper {
     FireStationDto toFireStationDto(FireStation station);
     FireStation toFireStation(FireStationDto dto);
 
-    // === FireTruck ===
+    @Mapping(source = "station", target = "stationId")
     FireTruckDto toFireTruckDto(FireTruck truck);
+
+    // For toEntity, we usually ignore station and event; set them in service
     @Mapping(target = "station", ignore = true)
+    @Mapping(target = "event", ignore = true)
     FireTruck toFireTruck(FireTruckDto dto);
 
     // === Report ===

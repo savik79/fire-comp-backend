@@ -10,7 +10,7 @@ import pl.jtrend.firecomp.dto.FireStationDto;
 import pl.jtrend.firecomp.service.FireStationService;
 
 @RestController
-@RequestMapping("/firestation")
+@RequestMapping("/firestations")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class FireStationController {

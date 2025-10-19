@@ -64,7 +64,7 @@ public class FireStationControllerTest {
         Mockito.when(fireStationService.create(any(FireStationDto.class)))
                 .thenReturn(fireStationDto);
 
-        mockMvc.perform(post("/firestation")
+        mockMvc.perform(post("/firestations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(fireStationDto)))
                 .andExpect(status().isCreated())
@@ -76,7 +76,7 @@ public class FireStationControllerTest {
     void testFindById() throws Exception {
         Mockito.when(fireStationService.findById(1L)).thenReturn(fireStationDto);
 
-        mockMvc.perform(get("/firestation/1"))
+        mockMvc.perform(get("/firestations/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Central Station"));
@@ -93,7 +93,7 @@ public class FireStationControllerTest {
         Mockito.when(fireStationService.update(eq(1L), any(FireStationDto.class)))
                 .thenReturn(updated);
 
-        mockMvc.perform(put("/firestation/1")
+        mockMvc.perform(put("/firestations/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updated)))
                 .andExpect(status().isOk())
@@ -105,7 +105,7 @@ public class FireStationControllerTest {
     void testDeleteFireStation() throws Exception {
         Mockito.doNothing().when(fireStationService).deleteById(1L);
 
-        mockMvc.perform(delete("/firestation/1"))
+        mockMvc.perform(delete("/firestations/1"))
                 .andExpect(status().isNoContent());
     }
 

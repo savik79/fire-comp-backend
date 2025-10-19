@@ -22,7 +22,7 @@ import pl.jtrend.firecomp.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-19T19:08:34+0200",
+    date = "2025-10-19T22:02:12+0200",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.10.jar, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -30,6 +30,8 @@ public class FireCompMapperImpl implements FireCompMapper {
 
     @Autowired
     private FiremanMapper firemanMapper;
+    @Autowired
+    private FireStationMapper fireStationMapper;
 
     @Override
     public UserDto toUserDto(User user) {
@@ -196,19 +198,20 @@ public class FireCompMapperImpl implements FireCompMapper {
             return null;
         }
 
-        FireTruckDto fireTruckDto = new FireTruckDto();
+        FireTruckDto.FireTruckDtoBuilder fireTruckDto = FireTruckDto.builder();
 
-        fireTruckDto.setId( truck.getId() );
-        fireTruckDto.setSideNumber( truck.getSideNumber() );
-        fireTruckDto.setPlateNumber( truck.getPlateNumber() );
-        fireTruckDto.setModel( truck.getModel() );
-        fireTruckDto.setYearOfProduction( truck.getYearOfProduction() );
-        fireTruckDto.setCapacityLiters( truck.getCapacityLiters() );
-        fireTruckDto.setType( truck.getType() );
-        fireTruckDto.setTypeDescription( truck.getTypeDescription() );
-        fireTruckDto.setRemarks( truck.getRemarks() );
+        fireTruckDto.stationId( fireStationMapper.map( truck.getStation() ) );
+        fireTruckDto.id( truck.getId() );
+        fireTruckDto.sideNumber( truck.getSideNumber() );
+        fireTruckDto.plateNumber( truck.getPlateNumber() );
+        fireTruckDto.model( truck.getModel() );
+        fireTruckDto.yearOfProduction( truck.getYearOfProduction() );
+        fireTruckDto.capacityLiters( truck.getCapacityLiters() );
+        fireTruckDto.type( truck.getType() );
+        fireTruckDto.typeDescription( truck.getTypeDescription() );
+        fireTruckDto.remarks( truck.getRemarks() );
 
-        return fireTruckDto;
+        return fireTruckDto.build();
     }
 
     @Override
