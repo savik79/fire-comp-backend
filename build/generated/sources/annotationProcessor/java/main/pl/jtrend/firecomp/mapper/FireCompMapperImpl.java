@@ -26,7 +26,7 @@ import pl.jtrend.firecomp.mapper.helper.UserMapper;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-22T18:00:08+0200",
+    date = "2025-10-22T21:34:33+0200",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.10.jar, environment: Java 21.0.8 (Oracle Corporation)"
 )
 @Component

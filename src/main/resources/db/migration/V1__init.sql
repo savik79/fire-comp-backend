@@ -5,7 +5,7 @@
 -- ============================================================
 
 -- ========== USERS ==========
-CREATE TABLE users
+CREATE TABLE "user"
 (
     id       BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -16,9 +16,25 @@ CREATE TABLE users
 
 CREATE TABLE user_roles
 (
-    user_id BIGINT       NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    user_id BIGINT       NOT NULL REFERENCES "user" (id) ON DELETE CASCADE,
     role    VARCHAR(100) NOT NULL,
     PRIMARY KEY (user_id, role)
+);
+
+-- ========== EVENTS ==========
+CREATE TABLE event
+(
+    id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name            VARCHAR(255)     NOT NULL,
+    description     TEXT,
+    place           VARCHAR(255)     NOT NULL,
+    date            DATE             NOT NULL,
+    duration_hours  DOUBLE PRECISION NOT NULL,
+    start_timestamp TIMESTAMP,
+    end_timestamp   TIMESTAMP,
+    mileage         INTEGER,
+    fire_units      INTEGER,
+    CONSTRAINT chk_duration_positive CHECK (duration_hours > 0)
 );
 
 -- ========== ADDRESSES ==========
@@ -73,21 +89,7 @@ CREATE TABLE fire_truck
     remarks            TEXT
 );
 
--- ========== EVENTS ==========
-CREATE TABLE event
-(
-    id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name            VARCHAR(255)     NOT NULL,
-    description     TEXT,
-    place           VARCHAR(255)     NOT NULL,
-    date            DATE             NOT NULL,
-    duration_hours  DOUBLE PRECISION NOT NULL,
-    start_timestamp TIMESTAMP,
-    end_timestamp   TIMESTAMP,
-    mileage         INTEGER,
-    fire_units      INTEGER,
-    CONSTRAINT chk_duration_positive CHECK (duration_hours > 0)
-);
+
 
 -- Many-to-many: event <-> fireman
 CREATE TABLE event_fireman
@@ -104,7 +106,7 @@ CREATE TABLE report
     type     VARCHAR(20) NOT NULL CHECK (type IN ('WORD', 'XML', 'PDF')),
     content  BYTEA       NOT NULL,
     event_id BIGINT      NOT NULL REFERENCES event (id) ON DELETE CASCADE,
-    user_id  BIGINT      NOT NULL REFERENCES users (id)
+    user_id  BIGINT      NOT NULL REFERENCES "user" (id)
 );
 
 -- Indexes for performance

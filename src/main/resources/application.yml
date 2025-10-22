@@ -1,0 +1,6 @@
+# Base application configuration.
+# The detailed datasource/JPA settings were moved to application-dev.yml.
+# Use Spring profile `dev` to enable them: SPRING_PROFILES_ACTIVE=dev
+
+server:
+  port: 8080

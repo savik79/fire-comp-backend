@@ -22,8 +22,7 @@ public class Report {
     @Column(nullable = false, length = 20)
     private ReportType type;
 
-    @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "bytea")
     private byte[] content;
 
     // Relation to Event (many reports per event)
