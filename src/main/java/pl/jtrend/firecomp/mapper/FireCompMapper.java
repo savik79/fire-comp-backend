@@ -3,10 +3,12 @@ import org.mapstruct.factory.Mappers;
 import org.mapstruct.*;
 import pl.jtrend.firecomp.dto.*;
 import pl.jtrend.firecomp.entity.*;
+import pl.jtrend.firecomp.mapper.helper.*;
 
 @org.mapstruct.Mapper(componentModel =  "spring",
         uses = {FiremanMapper.class, AddressMapper.class,
-                FireTruckMapper.class, FireStationMapper.class})
+                FireTruckMapper.class, FireStationMapper.class,
+                EventMapper.class, UserMapper.class})
 public interface FireCompMapper {
 
     FireCompMapper INSTANCE = Mappers.getMapper(FireCompMapper.class);
@@ -40,6 +42,8 @@ public interface FireCompMapper {
     FireTruck toFireTruck(FireTruckDto dto);
 
     // === Report ===
+    @Mapping(target = "eventId", source = "event")
+    @Mapping(target = "userId", source = "user")
     ReportDto toReportDto(Report report);
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "event", ignore = true)

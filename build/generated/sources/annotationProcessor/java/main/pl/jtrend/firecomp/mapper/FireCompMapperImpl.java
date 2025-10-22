@@ -19,11 +19,15 @@ import pl.jtrend.firecomp.entity.Fireman;
 import pl.jtrend.firecomp.entity.Report;
 import pl.jtrend.firecomp.entity.ReportType;
 import pl.jtrend.firecomp.entity.User;
+import pl.jtrend.firecomp.mapper.helper.EventMapper;
+import pl.jtrend.firecomp.mapper.helper.FireStationMapper;
+import pl.jtrend.firecomp.mapper.helper.FiremanMapper;
+import pl.jtrend.firecomp.mapper.helper.UserMapper;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-19T22:02:12+0200",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.10.jar, environment: Java 21.0.5 (Oracle Corporation)"
+    date = "2025-10-22T18:00:08+0200",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.10.jar, environment: Java 21.0.8 (Oracle Corporation)"
 )
 @Component
 public class FireCompMapperImpl implements FireCompMapper {
@@ -32,6 +36,10 @@ public class FireCompMapperImpl implements FireCompMapper {
     private FiremanMapper firemanMapper;
     @Autowired
     private FireStationMapper fireStationMapper;
+    @Autowired
+    private EventMapper eventMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public UserDto toUserDto(User user) {
@@ -243,6 +251,8 @@ public class FireCompMapperImpl implements FireCompMapper {
 
         ReportDto reportDto = new ReportDto();
 
+        reportDto.setEventId( eventMapper.map( report.getEvent() ) );
+        reportDto.setUserId( userMapper.map( report.getUser() ) );
         reportDto.setId( report.getId() );
         if ( report.getType() != null ) {
             reportDto.setType( report.getType().name() );

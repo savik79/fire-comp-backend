@@ -1,4 +1,4 @@
-package pl.jtrend.firecomp.mapper;
+package pl.jtrend.firecomp.mapper.helper;
 
 import pl.jtrend.firecomp.entity.FireStation;
 @org.mapstruct.Mapper(componentModel =  "spring")
